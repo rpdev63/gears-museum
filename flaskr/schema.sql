@@ -7,7 +7,10 @@ CREATE TABLE IF NOT EXISTS user (
 CREATE TABLE IF NOT EXISTS post (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name VarChar(80),
-  image VarChar(80),
+  image TEXT,
+  description TEXT,
+  avantages TEXT,
+  incovenients TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   id_user INTEGER,
   FOREIGN KEY (id_user) REFERENCES user (id)
