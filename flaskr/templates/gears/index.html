@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Liste des engrenages{% endblock %}</h1>
+{% if g.user %}
+<a class="action" href="{{ url_for('gears.create') }}">New</a>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<!-- to do -->
+<p>page affichage engrenages</p>
+{% endblock %}
