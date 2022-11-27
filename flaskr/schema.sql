@@ -4,25 +4,25 @@ CREATE TABLE IF NOT EXISTS user (
   password TEXT NOT NULL
 );
 
-CREATE TABLE post (
+CREATE TABLE IF NOT EXISTS post (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  gear_id INTEGER DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
   body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
+  FOREIGN KEY (author_id) REFERENCES user (id),
+  FOREIGN KEY (gear_id) REFERENCES gear(id)
 );
-
-
 
 CREATE TABLE IF NOT EXISTS gear (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name VarChar(80),
+  name VarChar(80) NOT NULL,
   image TEXT,
   description TEXT,
-  avantages TEXT,
-  inconvenients TEXT,
+  advantages TEXT,
+  disadvantages TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  id_user INTEGER,
-  FOREIGN KEY (id_user) REFERENCES user (id)
+  author_id INTEGER NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES user (id)
 );

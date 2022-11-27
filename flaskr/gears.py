@@ -2,20 +2,23 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.exceptions import abort
-
 from flaskr.auth import login_required
 from flaskr.db import get_db
-
 bp = Blueprint('gears', __name__)
 
+
+#show all gears
 @bp.route('/')
 def index():
     db = get_db()
-    #To do
-    gears = []
-    return render_template('gears/index.html', posts=gears)
+    gears = db.execute(
+        'SELECT g.id as gid, name, created_at, author_id, u.username as username'
+        ' FROM gear g JOIN user u ON g.author_id = u.id'
+        ' ORDER BY created_at DESC'
+    ).fetchall()
+    return render_template('gear/index.html', gears=gears)
 
-
+#create gear template
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
@@ -37,32 +40,37 @@ def create():
                 (title, body, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('gears.index'))
+            return redirect(url_for('gear.index'))
 
-    return render_template('gears/create.html')
+    return render_template('gear/create.html')
 
-
-def get_post(id, check_author=True):
-    post = get_db().execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' WHERE p.id = ?',
+#select gear by id
+def get_gear(id):
+    gear = get_db().execute(
+        'SELECT * '
+        ' FROM gear g WHERE g.id = ?',
         (id,)
     ).fetchone()
 
-    if post is None:
+    if gear is None:
         abort(404, f"Post id {id} doesn't exist.")
 
-    if check_author and post['author_id'] != g.user['id']:
-        abort(403)
+    return gear
+       
+@bp.route('/<int:id>/detail')
+def display_one(id):
+    gear = get_gear(id)
+    posts = get_db().execute(
+        '''SELECT * FROM post WHERE gear_id = ?''',(id,)
+    ).fetchall()
+    return render_template('gear/detail.html', gear=gear, posts = posts)
 
-    return post
 
-
+#update gear template
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    post = get_post(id)
+    post = get_gear(id)
 
     if request.method == 'POST':
         title = request.form['title']
@@ -82,16 +90,16 @@ def update(id):
                 (title, body, id)
             )
             db.commit()
-            return redirect(url_for('gears.index'))
+            return redirect(url_for('gear.index'))
 
-    return render_template('gears/update.html', post=post)
+    return render_template('gear/update.html', post=post)
 
-
+#delete gear by id
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    get_post(id)
+    get_gear(id)
     db = get_db()
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for('gears.index'))
+    return redirect(url_for('gear.index'))
