@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Engrenages{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<article class="post">
+    <header>
+        <div>
+            <h1>{{ gear['name'] }}</h1>
+        </div>
+    </header>
+    <h3>Description</h3>
+    <p class="body">{{ gear['description'] }}</p>
+    <h3>Avantages</h3>
+    <p class="body">{{ gear['advantages'] }}</p>
+    <h3>Inconvenients</h3>
+    <p class="body">{{ gear['disadvantages'] }}</p>
+    <h3>Fil de discussion</h3>
+    <br>
+    {% for post in posts %}
+    <header>
+        <div>
+            <p>{{ post['title'] }}</p>
+        </div>
+    </header>
+    <p class="body">{{ post['body'] }}</p>
+    {% endfor %}
+</article>
+{% endblock %}
