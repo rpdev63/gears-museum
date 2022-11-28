@@ -6,5 +6,22 @@
 
 {% block content %}
 <!-- to do -->
-<p>page update engrenages</p>
-{% endblock %}
+<form method="post">
+    <label for="name">Nom</label>
+    <input name="name" id="name" value="{{ request.form['name'] or post['name'] }}" required>
+    <label for="description">Description </label>
+    <textarea name="description" id="description">{{ request.form['description'] or post['description'] }}</textarea>
+    <label for="Image">Image</label>
+    <input name="image" id="Image" value="{{ request.form['Image'] }}">
+    <label for="advantages">Advantages</label>
+    <textarea name="advantages" id="advantages">{{ request.form['advantages'] or post['advantages'] }}</textarea>
+    <label for="disadvantages">Disadvantages</label>
+    <textarea name="disadvantages" id="disadvantages">{{ request.form['disadvantages'] }} or post['disadvantages']</textarea>
+
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+  <form action="{{ url_for('post.delete', id=post['id']) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+  {% endblock %}
