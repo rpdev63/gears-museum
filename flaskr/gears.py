@@ -23,11 +23,13 @@ def index():
 @login_required
 def create():
     if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
+        name = request.form['name']
+        description = request.form['description']
+        advantages = request.form['advantages']
+        disadvantages = request.form['disadvantages']
         error = None
 
-        if not title:
+        if not name:
             error = 'Title is required.'
 
         if error is not None:
