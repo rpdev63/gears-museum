@@ -7,20 +7,15 @@
 {% block content %}
 <!-- formulaire d'ajout engrenage -->
 <form method="post">
-  <label for="name">Nom</label>
-  <input type="text" id="nom" value="{{ request.form['name'] }}" required>
-  <label for="image">Image</label>
-  <input type="image" id="image" value="{{ request.form['image'] }}" required>
-  <label for="description">Description</label>
-  <input type="text" id="description" value="{{ request.form['description'] }}" required>
-  <label for="advantages">Advantages</label>
-  <input type="text" id="advantages" value="{{ request.form['advantages'] }}" required>
-  <label for="disadvantages">Disadvantages</label>
-  <input type="text" id="disadvantages" value="{{ request.form['disadvantages'] }}" required>
-
-  <div class="button">
-    <button type="submit" value="Save">Envoyer le formulaire</button>
-  </div>
+  <label for="name">Nom de l'engrenage</label>
+  <input name="name" id="name" value="{{ request.form['name'] }}" required>
+  <label for="description">Description de l'engrenage</label>
+  <textarea name="description" id="description">{{ request.form['description'] }}</textarea>
+  <label for="advantages">Avantages de l'engrenage</label>
+  <textarea name="advantages" id="advantages">{{ request.form['advantages'] }}</textarea>
+  <label for="disadvantages">Desavantages de l'engrenage</label>
+  <textarea name="disadvantages" id="disadvantages">{{ request.form['disadvantages'] }}</textarea>
+  <input type="submit" value="Save">
 </form>
-
+</form>
 {% endblock %}
