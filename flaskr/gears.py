@@ -2,10 +2,19 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.exceptions import abort
+from werkzeug.utils import secure_filename
 from flaskr.auth import login_required
 from flaskr.db import get_db
 from flask import Flask,render_template,request
+import os
 bp = Blueprint('gears', __name__)
+
+IMG_PATH = os.getcwd() + r'/flaskr/static/uploads'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 #show all gears
@@ -22,12 +31,22 @@ def index():
 #create gear template
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
-def create():
+def create():   
     if request.method == 'POST':
+        filename=''
+        file = request.files['file']
+        if file.filename == '':
+            flash('No image selected for uploading')
+        if file and allowed_file(file.filename):
+            filename = secure_filename(str(file.filename))
+            file.save(os.path.join(IMG_PATH, filename))
+
         name = request.form['name']
         description = request.form['description']
         advantages = request.form['advantages']
         disadvantages = request.form['disadvantages']
+        image = r'/flaskr/static/uploads/' + filename
+        print("L'URL est " + image)
         error = None
 
         if not name:
@@ -38,9 +57,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO gear (name, advantages, description,disadvantages, author_id)'
-                ' VALUES (?, ?, ?,?, ?)',
-                (name, advantages, description,disadvantages, g.user['id'])
+                'INSERT INTO gear (name, advantages, description,disadvantages, image, author_id)'
+                ' VALUES (?,?,?,?,?,? )',
+                (name, advantages, description, disadvantages, image, g.user['id'])
             )
             db.commit()
             return redirect(url_for('gears.index'))

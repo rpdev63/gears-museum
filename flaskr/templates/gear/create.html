@@ -6,7 +6,7 @@
 
 {% block content %}
 <!-- formulaire d'ajout engrenage -->
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <label for="name">Nom de l'engrenage</label>
   <input name="name" id="name" value="{{ request.form['name'] }}" required>
   <label for="description">Description de l'engrenage</label>
@@ -15,7 +15,25 @@
   <textarea name="advantages" id="advantages">{{ request.form['advantages'] }}</textarea>
   <label for="disadvantages">Desavantages de l'engrenage</label>
   <textarea name="disadvantages" id="disadvantages">{{ request.form['disadvantages'] }}</textarea>
+  <h2>Select a file to upload</h2>
+  <p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  </p>
+  {% if filename %}
+  {% endif %}
+  <dl>
+    <p>
+      <input type="file" name="file" autocomplete="off">
+    </p>
+  </dl>
   <input type="submit" value="Save">
-</form>
 </form>
 {% endblock %}
