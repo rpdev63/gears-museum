@@ -26,3 +26,14 @@ CREATE TABLE IF NOT EXISTS gear (
   author_id INTEGER NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
+
+INSERT INTO user (username, password)
+VALUES 
+('admin1', 'FgregDFnf'),
+('user1', 'Ufzojvrehhtrf');
+
+#requête ajout de admin1 et user1 (table user)
+
+#requête ajout de plusieurs post (table post)
+
+#requête ajout de 4 engrenages (table gear)
