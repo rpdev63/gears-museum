@@ -4,6 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
+from flask import Flask,render_template,request
 bp = Blueprint('gears', __name__)
 
 
@@ -12,7 +13,7 @@ bp = Blueprint('gears', __name__)
 def index():
     db = get_db()
     gears = db.execute(
-        'SELECT g.id as gid, name, created_at, author_id, u.username as username'
+        'SELECT g.id as gid, name, description, advantages, disadvantages, created_at, author_id, u.username as username'
         ' FROM gear g JOIN user u ON g.author_id = u.id'
         ' ORDER BY created_at DESC'
     ).fetchall()
@@ -23,11 +24,13 @@ def index():
 @login_required
 def create():
     if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
+        name = request.form['name']
+        description = request.form['description']
+        advantages = request.form['advantages']
+        disadvantages = request.form['disadvantages']
         error = None
 
-        if not title:
+        if not name:
             error = 'Title is required.'
 
         if error is not None:
@@ -35,12 +38,12 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, author_id)'
-                ' VALUES (?, ?, ?)',
-                (title, body, g.user['id'])
+                'INSERT INTO gear (name, advantages, description,disadvantages, author_id)'
+                ' VALUES (?, ?, ?,?, ?)',
+                (name, advantages, description,disadvantages, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('gear.index'))
+            return redirect(url_for('gears.index'))
 
     return render_template('gear/create.html')
 
@@ -61,7 +64,7 @@ def get_gear(id):
 def display_one(id):
     gear = get_gear(id)
     posts = get_db().execute(
-        '''SELECT * FROM post WHERE gear_id = ?''',(id,)
+        '''SELECT * FROM gear WHERE id = ?''',(id,)
     ).fetchall()
     return render_template('gear/detail.html', gear=gear, posts = posts)
 
@@ -73,11 +76,13 @@ def update(id):
     post = get_gear(id)
 
     if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
+        name = request.form['name']
+        description = request.form['description']
+        advantages = request.form['advantages']
+        disadvantages = request.form['disadvantages']
         error = None
 
-        if not title:
+        if not name:
             error = 'Title is required.'
 
         if error is not None:
@@ -85,9 +90,9 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, body = ?'
+                'UPDATE gear SET name = ?, advantages = ?, description = ? , disadvantages = ? '
                 ' WHERE id = ?',
-                (title, body, id)
+                (name,advantages,description,disadvantages, id)
             )
             db.commit()
             return redirect(url_for('gear.index'))
@@ -100,40 +105,6 @@ def update(id):
 def delete(id):
     get_gear(id)
     db = get_db()
-    db.execute('DELETE FROM post WHERE id = ?', (id,))
+    db.execute('DELETE FROM gear WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('gear.index'))
-
-import os
-from flask import Flask, flash, request, redirect, url_for
-from werkzeug.utils import secure_filename
-
-UPLOAD_FOLDER = 'static/image'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('download_file', name=filename))
-    return
