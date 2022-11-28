@@ -4,17 +4,6 @@ CREATE TABLE IF NOT EXISTS user (
   password TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS post (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  gear_id INTEGER DEFAULT 0,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id),
-  FOREIGN KEY (gear_id) REFERENCES gear(id)
-);
-
 CREATE TABLE IF NOT EXISTS gear (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name VarChar(80) NOT NULL,
@@ -27,13 +16,59 @@ CREATE TABLE IF NOT EXISTS gear (
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
+CREATE TABLE IF NOT EXISTS post (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  author_id INTEGER NOT NULL,
+  gear_id INTEGER DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES user (id),
+  FOREIGN KEY (gear_id) REFERENCES gear(id)
+);
+
 INSERT INTO user (username, password)
 VALUES 
 ('admin1', 'FgregDFnf'),
 ('user1', 'Ufzojvrehhtrf');
 
-#requête ajout de admin1 et user1 (table user)
+INSERT INTO gear (name, image, description, advantages, disadvantages, author_id)
+VALUES 
+(
+'engrenages cylindriques à denture droite', 
+NULL, 
+'Cet engrenage peut-être de deux types, extérieur ou intérieur', 
+'simple et économique', 
+'bruyant et vitesses de rotation limitées',  
+'admin1'
+),
+(
+'engrenages cylindriques à denture hélicoïdale', 
+NULL, 
+'Pour les machines outils', 
+'transmission plus souple et moins bruyante, vitesses plus importantes', 
+'effort axial supplémentaire, rendement moins bon', 
+'admin1'
+),
+(
+'engrenages coniques', 
+NULL, 
+'Réalisé sur tailleuse à couteaux', 
+'possibilité de choisir le sens de rotation de la roue menée', 
+'solution moins économique, nécessite un réglage des roues au montage', 
+'user1'
+),
+(
+'engrenages à roue et vis sans fin', 
+NULL, 
+'modèle bronze, entrées pour arcellormittal', 
+'arbres quelconques, souvent orthogonaux', 
+'rendement faible et parfois non réversible (ce qui peut être aussi un avantage)', 
+'user1'
+);
+
+INSERT INTO post (
+
 
 #requête ajout de plusieurs post (table post)
 
-#requête ajout de 4 engrenages (table gear)
