@@ -6,4 +6,20 @@
 
 {% block content %}
 <!-- formulaire d'ajout engrenage -->
+<form method="post">
+    <label for="Nom">Nom</label>
+    <input type="text" id="Nom" value="{{ request.form['Nom'] }}" required>
+    <label for="Image">Image</label>
+    <input type="image" id="Image" value="{{ request.form['Image'] }}" required>
+    <label for="Description">Description</label>
+    <input type="text" id="Description" value="{{ request.form['Description'] }}" required>
+    <label for="Advantages">Advantages</label>
+    <input type="text" id="Advantages" value="{{ request.form['Advantages'] }}" required>
+    <label for="Disadvantages">Disadvantages</label>
+    <input type="text" id="Disadvantages" value="{{ request.form['Disadvantages'] }}" required>
+  </form>
+
+  <div class="button">
+    <button type="submit">Envoyer le formulaire</button>
+  </div>
 {% endblock %}
