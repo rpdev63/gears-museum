@@ -22,7 +22,7 @@ def allowed_file(filename):
 def index():
     db = get_db()
     gears = db.execute(
-        'SELECT g.id as gid, name, description, advantages, disadvantages, created_at, author_id, u.username as username'
+        'SELECT g.id as gid, name, created_at, author_id, u.username as username'
         ' FROM gear g JOIN user u ON g.author_id = u.id'
         ' ORDER BY created_at DESC'
     ).fetchall()
@@ -43,6 +43,7 @@ def create():
 
         name = request.form['name']
         description = request.form['description']
+        image = request.form['image']
         advantages = request.form['advantages']
         disadvantages = request.form['disadvantages']
         image = r'/flaskr/static/uploads/' + filename
@@ -50,7 +51,7 @@ def create():
         error = None
 
         if not name:
-            error = 'Title is required.'
+            error = 'Name is required.'
 
         if error is not None:
             flash(error)
@@ -97,24 +98,26 @@ def update(id):
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
+        image = request.form['image']
         advantages = request.form['advantages']
         disadvantages = request.form['disadvantages']
+
         error = None
 
         if not name:
-            error = 'Title is required.'
+            error = 'Name is required.'
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
             db.execute(
-                'UPDATE gear SET name = ?, advantages = ?, description = ? , disadvantages = ? '
-                ' WHERE id = ?',
-                (name,advantages,description,disadvantages, id)
+                'INSERT INTO gear (name, advantages, description,disadvantages, image, author_id)'
+                ' VALUES (?,?,?,?,?,? )',
+                (name, advantages, description, disadvantages, image, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('gear.index'))
+            return redirect(url_for('gears.index'))
 
     return render_template('gear/update.html', post=post)
 
@@ -126,4 +129,4 @@ def delete(id):
     db = get_db()
     db.execute('DELETE FROM gear WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for('gear.index'))
+    return redirect(url_for('gears.index'))
