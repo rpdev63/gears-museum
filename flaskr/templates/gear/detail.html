@@ -8,23 +8,33 @@
 <article class="post">
     <header id = "header_detail">
         <div id = "contenu">
-            <h2 id = "titre_detail">{{ gear['name'] }}</h2>
+            <h2 id = "titre_detail">{{ gear['name'] }}</h2><br>
         </div>
     </header>
+    <br>
     <h3 id = "nom">Description</h3>
+    <br>
     <p id="nom_2">{{ gear['description'] }}</p>
+    <br>
     <h3 id = "nom">Avantages</h3>
+    <br>
     <p id="nom_2">{{ gear['advantages'] }}</p>
+    <br>
     <h3 id = "nom">Inconvenients</h3>
+    <br>
     <p id="nom_2">{{ gear['disadvantages'] }}</p>
+    <br>
     <h3 id = "nom">Fil de discussion</h3>
+    <br>
     <a class="action" href="{{ url_for('post.create', id=gear['id']) }}">Ajouter un post</a>
     <br>
     {% for post in posts %}
     <div>
         <p>{{ post['title'] }}</p>
+        <br>
     </div>
     <p class="body">{{ post['body'] }}</p>
+    <br>
     {% endfor %}
     <img src={{ url_for('static', filename=gear['image'] ) }} alt="" />
 </article>
