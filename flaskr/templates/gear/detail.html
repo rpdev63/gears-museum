@@ -6,18 +6,18 @@
 
 {% block content %}
 <article class="post">
-    <header>
-        <div>
-            <h1>{{ gear['name'] }}</h1>
+    <header id = "header_detail">
+        <div id = "contenu">
+            <h2 id = "titre_detail">{{ gear['name'] }}</h2>
         </div>
     </header>
-    <h3>Description</h3>
-    <p class="body">{{ gear['description'] }}</p>
-    <h3>Avantages</h3>
-    <p class="body">{{ gear['advantages'] }}</p>
-    <h3>Inconvenients</h3>
-    <p class="body">{{ gear['disadvantages'] }}</p>
-    <h3>Fil de discussion</h3>
+    <h3 id = "nom">Description</h3>
+    <p id="nom_2">{{ gear['description'] }}</p>
+    <h3 id = "nom">Avantages</h3>
+    <p id="nom_2">{{ gear['advantages'] }}</p>
+    <h3 id = "nom">Inconvenients</h3>
+    <p id="nom_2">{{ gear['disadvantages'] }}</p>
+    <h3 id = "nom">Fil de discussion</h3>
     <a class="action" href="{{ url_for('post.create', id=gear['id']) }}">Ajouter un post</a>
     <br>
     {% for post in posts %}
