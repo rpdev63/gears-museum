@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='create.css') }}">
 
 <body>
   <div class="main-content">
@@ -16,10 +17,10 @@
         <ul>
           <li><a href="http://127.0.0.1:5000/propos"> A propos</a></li>
           {% if g.user %}
-          <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+          <li><a href="{{ url_for('auth.logout') }}">Déconnexion</a></li>
           {% else %}
-          <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-          <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+          <li><a href="{{ url_for('auth.register') }}">Profil</a></li>
+          <li><a href="{{ url_for('auth.login') }}">Connexion</a></li>
           {% endif %}
         </ul>
       </div>

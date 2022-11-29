@@ -23,6 +23,7 @@ hr {
 #nom {
     color: #a08f89;
     font-size: 15px;
+    text-transform: uppercase;
 }
 
 .action {
@@ -49,4 +50,3 @@ hr {
     width: 100%;
     height: 100%;
 }
-

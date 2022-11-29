@@ -15,6 +15,7 @@
 body {
     min-height: 100vh;
     background: rgb(241, 239, 239);
+    padding-bottom: 20px;
 }
 
 .main-content {

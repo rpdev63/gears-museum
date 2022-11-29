@@ -1,0 +1,30 @@
+#ajouter {
+    color: #a08f89;
+    font-size: 35px;
+    margin-bottom: 40px;
+}
+
+label {
+    margin: 50px;
+}
+
+#select {
+    margin-top: 40px;
+    margin-left: 48px;
+}
+
+#name {
+    margin: 5px;
+}
+
+#description {
+    margin: 10px;
+}
+
+#advantages {
+    margin: 10px;
+}
+
+#disadvantages {
+    margin: 10px;
+}
