@@ -18,6 +18,7 @@ window.addEventListener("resize", () => {
     }
     if (window.innerWidth < 991 && active) {
         navbarElt.classList.remove('active');
+        navbarElt.style.color('red')
         toggleElt.classList.remove('active');
         active = false;
     }
