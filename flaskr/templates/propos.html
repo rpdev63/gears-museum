@@ -29,7 +29,10 @@
       {% for message in get_flashed_messages() %}
       <div class="flash">{{ message }}</div>
       {% endfor %}
-      {% block content %}{% endblock %}
+      {% block content %}
+      <h1> Cetee app vous est proposé par Rémi, Laurence et Dylan</h1>
+      <h2> Elle vous permet d'ajouter facilement des engrenages, ainsi que des commentaires</h2>
+      <img src="../static/image\engrenage_propos.jpg" alt="img engrenage"/>{% endblock %}
     </section>
   </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>

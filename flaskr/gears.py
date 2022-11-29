@@ -130,3 +130,8 @@ def delete(id):
     db.execute('DELETE FROM gear WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('gears.index'))
+
+
+@bp.route('/propos')
+def propos():
+    return render_template('propos.html')
