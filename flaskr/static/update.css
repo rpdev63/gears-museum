@@ -1,0 +1,34 @@
+#edit {
+    color: #a08f89;
+    font-size: 35px;
+    margin-bottom: 40px;
+}
+
+label {
+    margin: 50px;
+}
+
+#name {
+    margin-left: 90px;
+}
+
+#description {
+    margin-left: 5px;
+}
+
+#image {
+    margin-left: 70px;
+}
+
+#advantages {
+    margin-left: 5px;
+}
+
+#disadvantages {
+    margin-left: -30px;
+    padding-bottom: 20px;;
+}
+
+submit {
+    margin-top: 50px;;
+}
