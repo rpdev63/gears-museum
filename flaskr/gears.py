@@ -84,7 +84,7 @@ def get_gear(id):
 def display_one(id):
     gear = get_gear(id)
     posts = get_db().execute(
-        '''SELECT * FROM post WHERE gear_id = ?''',(id,)
+        '''SELECT * FROM post WHERE gear_id = ? ORDER BY created_at DESC ''',(id,)
     ).fetchall()
     return render_template('gear/detail.html', gear=gear, posts = posts)
 

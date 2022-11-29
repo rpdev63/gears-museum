@@ -2,16 +2,28 @@ const toggleElt = document.getElementById("toggle");
 const navbarElt = document.getElementById("navbar");
 const headerElt = document.getElementById("header");
 
-navbarElt.classList.toggle('active');
-alert("Ca marche");
+let active = false
+if (window.innerWidth > 991) {
+    navbarElt.classList.toggle("active");
+    active = true;
+}
+
+window.addEventListener("resize", () => {
+
+
+    if (window.innerWidth > 991 && !active) {
+
+        navbarElt.classList.add('active');
+        active = true;
+    }
+    if (window.innerWidth < 991 && active) {
+        navbarElt.classList.remove('active');
+        toggleElt.classList.remove('active');
+        active = false;
+    }
+});
+
 toggleElt.addEventListener("click", function changeToggle() {
     toggleElt.classList.toggle('active');
     navbarElt.classList.toggle('active');
 });
-
-document.onclick = function (e) {
-    if (e.target.id !== 'header' && e.target.id !== 'navbar' && e.target.id !== 'toggle') {
-        toggleElt.classList.remove('active');
-        navbarElt.classList.remove('active');
-    }
-}
