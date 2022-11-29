@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
-
-{% block header %}
-  <h1>{% block title %}Register{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
-  <form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Register">
-  </form>
-{% endblock %}
+<h3 class="auth-title">Enregistrement<h3>
+    <div class="login">
+      <div class="box">
+        <form method="post">
+          <label for="username">Identifiant</label>
+          <p>
+            <input name="username" id="username" required>
+          </p>
+          <br>
+          <label for="password">Mot de passe</label>
+          <p>
+            <input type="password" name="password" id="password" required>
+          </p>
+          <br>
+          <button type="submit">S'enregister</button>
+        </form>
+      </div>
+    </div>
+    {% endblock %}

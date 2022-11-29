@@ -1,12 +1,14 @@
-.login {
+.login,
+.register {
     font-family: 'Montserrat';
-    margin-top: 70px;
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login .box {
+.login .box,
+.register .box {
     padding: 40px 40px;
     background-color: #eee0d7;
     border-radius: 25px;
@@ -15,19 +17,12 @@
     max-width: 400px;
 }
 
-.login label {
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 10px 0;
-}
-
-.login input {
-    margin-top: 8px;
-    height: 30px;
-    border-radius: 10px;
-    font-family: sans-serif;
-    margin-bottom: 10px;
-    border-color: silver;
-    padding: 5px 5px;
-
+.auth-title {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: silver;
+    text-decoration-line: 3px;
 }

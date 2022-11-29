@@ -11,9 +11,10 @@
     scroll-behavior: smooth;
 }
 
+
 body {
     min-height: 100vh;
-    background: #fff;
+    background: rgb(241, 239, 239);
     overflow: hidden;
 }
 
@@ -24,7 +25,18 @@ body {
 button {
     padding: 5px 8px;
     border-radius: 2px;
-    border-color: #a08f89
+    border: 2px solid #a08f89;
+
+    transition: all 0.3s;
+}
+
+button:hover {
+    padding: 5px 8px;
+    border-radius: 2px;
+    background-color: #a08f89;
+    color: white;
+    border: 2px solid black;
+    transition: all 0.3s;
 }
 
 .flash {
@@ -32,6 +44,22 @@ button {
     padding: 1em;
     background: #cae6f6;
     border: 1px solid #377ba8;
+}
+
+label {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+input {
+    margin-top: 8px;
+    height: 30px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+    border-color: silver;
+    padding: 5px 5px;
 }
 
 /*====================  NAVBAR  ======================= */
@@ -66,7 +94,7 @@ button {
     position: absolute;
     width: 60px;
     height: 60px;
-    background: #9051ff;
+    background: #a08f89;
     cursor: pointer;
     /* alignement des barres à l'intérieur */
     display: none
@@ -115,9 +143,8 @@ button {
 
 #navbar.active {
     width: 660px;
-}
 
-#navbar.active ul li a {}
+}
 
 #navbar ul {
     display: flex;
@@ -150,7 +177,7 @@ button {
 #navbar ul li a:hover,
 .logo:hover {
     color: #fff;
-    background: #9051ff;
+    background: #a08f89;
     transition: all 0.2s;
 }
 
