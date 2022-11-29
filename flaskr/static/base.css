@@ -15,7 +15,6 @@
 body {
     min-height: 100vh;
     background: rgb(241, 239, 239);
-    overflow: hidden;
 }
 
 .main-content {
