@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Liste des engrenages{% endblock %}</h1>
+<h2 id="titre">{% block title %}Liste des engrenages{% endblock %}</h2>
 {% if g.user %}
 
 <a class="action" href="{{ url_for('gears.create') }}">Ajouter</a>
@@ -9,11 +9,12 @@
 {% endblock %}
 
 {% block content %}
+<div id="contenu">
 {% for gear in gears %}
 <article class="post">
-    <header>
+    <header id="nom">
         <div>
-            <h3>{{ gear['name'] }}<h3>
+            <h3 id="engrenage">{{ gear['name'] }}<h3>
                     <div class="about">by {{ gear['username'] }} on {{ gear['created_at'].strftime('%Y-%m-%d') }}</div>
         </div>
         <a class="action" href="{{ url_for('gears.display_one', id=gear['gid']) }}">Voir</a>
@@ -27,5 +28,5 @@
 <hr>
 {% endif %}
 {% endfor %}
-
+</div>
 {% endblock %}
