@@ -45,7 +45,7 @@ def create():
         description = request.form['description']
         advantages = request.form['advantages']
         disadvantages = request.form['disadvantages']
-        image = r'/flaskr/static/uploads/' + filename
+        image = r'uploads/' + filename
         print("L'URL est " + image)
         error = None
 

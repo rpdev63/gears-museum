@@ -26,5 +26,6 @@
     </div>
     <p class="body">{{ post['body'] }}</p>
     {% endfor %}
+    <img src={{ url_for('static', filename=gear['image'] ) }} alt="" />
 </article>
 {% endblock %}
