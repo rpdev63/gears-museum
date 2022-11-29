@@ -43,7 +43,6 @@ def create():
 
         name = request.form['name']
         description = request.form['description']
-        image = request.form['image']
         advantages = request.form['advantages']
         disadvantages = request.form['disadvantages']
         image = r'/flaskr/static/uploads/' + filename
@@ -79,12 +78,13 @@ def get_gear(id):
         abort(404, f"Post id {id} doesn't exist.")
 
     return gear
-       
+
+#display one gear       
 @bp.route('/<int:id>/detail')
 def display_one(id):
     gear = get_gear(id)
     posts = get_db().execute(
-        '''SELECT * FROM gear WHERE id = ?''',(id,)
+        '''SELECT * FROM post WHERE gear_id = ?''',(id,)
     ).fetchall()
     return render_template('gear/detail.html', gear=gear, posts = posts)
 

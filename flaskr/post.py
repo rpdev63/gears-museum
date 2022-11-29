@@ -18,14 +18,14 @@ def index():
     ).fetchall()
     return render_template('post/index.html', posts=posts)
 
-
 #create post template 
-@bp.route('/create', methods=('GET', 'POST'))
+@bp.route('/<int:id>/create', methods=('GET', 'POST'))
 @login_required
-def create():
+def create(id):
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
+        gear_id = id
         error = None
 
         if not title:
@@ -36,12 +36,12 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, author_id)'
-                ' VALUES (?, ?, ?)',
-                (title, body, g.user['id'])
+                'INSERT INTO post (title, body, gear_id, author_id)'
+                ' VALUES (?, ?, ?, ?)',
+                (title, body, gear_id, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('post.index'))
+            return redirect(url_for('gears.display_one', id=id))
 
     return render_template('post/create.html')
 
@@ -86,7 +86,7 @@ def update(id):
                 (title, body, id)
             )
             db.commit()
-            return redirect(url_for('post.index'))
+            return redirect(url_for('gears.index'))
 
     return render_template('post/update.html', post=post)
 

@@ -18,13 +18,12 @@
     <h3>Inconvenients</h3>
     <p class="body">{{ gear['disadvantages'] }}</p>
     <h3>Fil de discussion</h3>
+    <a class="action" href="{{ url_for('post.create', id=gear['id']) }}">Ajouter un post</a>
     <br>
     {% for post in posts %}
-    <header>
-        <div>
-            <p>{{ post['title'] }}</p>
-        </div>
-    </header>
+    <div>
+        <p>{{ post['title'] }}</p>
+    </div>
     <p class="body">{{ post['body'] }}</p>
     {% endfor %}
 </article>
