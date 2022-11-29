@@ -1,7 +1,7 @@
 <!doctype html>
 <title>Musée virtuel des engrenages </title>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
 
 <body>
   <div class="main-content">
@@ -14,10 +14,10 @@
         <ul>
           <li><a href="http://127.0.0.1:5000/propos"> A propos</a></li>
           {% if g.user %}
-          <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+          <li><a href="{{ url_for('auth.logout') }}">Déconnexion</a></li>
           {% else %}
-          <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-          <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+          <li><a href="{{ url_for('auth.register') }}">Inscription</a></li>
+          <li><a href="{{ url_for('auth.login') }}">Connexion</a></li>
           {% endif %}
         </ul>
       </div>
@@ -32,7 +32,7 @@
       {% block content %}
       <h1> Cette app vous est proposé par Rémi, Laurence et Dylan</h1>
       <h2> Elle vous permet d'ajouter facilement des engrenages, ainsi que des commentaires</h2>
-      <img src="../static/image\engrenage_propos.jpg" alt="img engrenage"/>{% endblock %}
+      <img src="../static/image\engrenage_propos.jpg" alt="img engrenage" />{% endblock %}
     </section>
   </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>

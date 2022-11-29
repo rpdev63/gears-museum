@@ -6,29 +6,30 @@
 <h2 id="titre">{% block title %}Liste des engrenages{% endblock %}</h2>
 {% if g.user %}
 
-<a class="action" href="{{ url_for('gears.create') }}">Ajouter</a>
+<a class="action" style=' font-size :1.8rem' href="{{ url_for('gears.create') }}">Ajouter</a>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 <div id="contenu">
-{% for gear in gears %}
-<article class="post">
-    <header id="nom">
-        <div>
-            <h3 id="engrenage">{{ gear['name'] }}<h3>
-                    <div class="about">by {{ gear['username'] }} on {{ gear['created_at'].strftime('%Y-%m-%d') }}</div>
-        </div>
-        <a class="action" href="{{ url_for('gears.display_one', id=gear['gid']) }}">Voir</a>
-        {% if g.user['id'] == gear['author_id'] %}
+    {% for gear in gears %}
+    <article class="post">
+        <header id="nom">
+            <div>
+                <h3 id="engrenage">{{ gear['name'] }}<h3>
+                        <div class="about">by {{ gear['username'] }} on {{ gear['created_at'].strftime('%Y-%m-%d') }}
+                        </div>
+            </div>
+            <a class="action" href="{{ url_for('gears.display_one', id=gear['gid']) }}">Voir</a>
+            {% if g.user['id'] == gear['author_id'] %}
 
-        <a class="action" href="{{ url_for('gears.update', id=gear['gid']) }}">Edit</a>
-        {% endif %}
-    </header>
-</article>
-{% if not loop.last %}
-<hr>
-{% endif %}
-{% endfor %}
+            <a class="action" href="{{ url_for('gears.update', id=gear['gid']) }}">Edit</a>
+            {% endif %}
+        </header>
+    </article>
+    {% if not loop.last %}
+    <hr>
+    {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}

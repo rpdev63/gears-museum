@@ -9,26 +9,22 @@ label {
 }
 
 #name {
-    margin-left: 90px;
+    margin: 5px;
 }
 
 #description {
-    margin-left: 5px;
+    margin: 10px;
 }
 
 #image {
-    margin-left: 70px;
+    margin: 10px;
 }
 
 #advantages {
-    margin-left: 5px;
+    margin: 10px;
 }
 
 #disadvantages {
-    margin-left: -30px;
-    padding-bottom: 20px;;
-}
-
-submit {
-    margin-top: 50px;;
+    margin: 10px;
+    padding-bottom: 20px;
 }

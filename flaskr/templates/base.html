@@ -1,11 +1,11 @@
 <!doctype html>
 <title>Musée virtuel des engrenages </title>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='create.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='update.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/auth.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/create.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/update.css') }}">
 
 <body>
   <div class="main-content">
@@ -20,7 +20,7 @@
           {% if g.user %}
           <li><a href="{{ url_for('auth.logout') }}">Déconnexion</a></li>
           {% else %}
-          <li><a href="{{ url_for('auth.register') }}">Profil</a></li>
+          <li><a href="{{ url_for('auth.register') }}">Inscription</a></li>
           <li><a href="{{ url_for('auth.login') }}">Connexion</a></li>
           {% endif %}
         </ul>

@@ -93,12 +93,12 @@ def display_one(id):
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    post = get_gear(id)
+    gear = get_gear(id)
 
     if request.method == 'POST':
+        
         name = request.form['name']
         description = request.form['description']
-        image = request.form['image']
         advantages = request.form['advantages']
         disadvantages = request.form['disadvantages']
 
@@ -112,14 +112,14 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO gear (name, advantages, description,disadvantages, image, author_id)'
-                ' VALUES (?,?,?,?,?,? )',
-                (name, advantages, description, disadvantages, image, g.user['id'])
+                'UPDATE gear SET name = ?, advantages = ?, description = ?, disadvantages = ?,  author_id = ?'
+                ' WHERE id = ?',
+                (name, advantages, description, disadvantages,  g.user['id'], id)
             )
             db.commit()
             return redirect(url_for('gears.index'))
 
-    return render_template('gear/update.html', post=post)
+    return render_template('gear/update.html', gear=gear)
 
 #delete gear by id
 @bp.route('/<int:id>/delete', methods=('POST',))
