@@ -23,6 +23,7 @@ hr {
 #nom {
     color: #a08f89;
     font-size: 15px;
+    text-transform: uppercase;
 }
 
 .action {

@@ -1,21 +1,29 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Ajouter un engrenage{% endblock %}</h1>
+<h1 id="ajouter">{% block title %}Ajouter un engrenage{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <!-- formulaire d'ajout engrenage -->
 <form method="post" enctype="multipart/form-data">
+  <p>
   <label for="name">Nom de l'engrenage</label>
   <input name="name" id="name" value="{{ request.form['name'] }}" required>
+  </p>
+  <p>
   <label for="description">Description de l'engrenage</label>
   <textarea name="description" id="description">{{ request.form['description'] }}</textarea>
+  </p>
+  <p>
   <label for="advantages">Avantages de l'engrenage</label>
   <textarea name="advantages" id="advantages">{{ request.form['advantages'] }}</textarea>
+  </p>
+  <p>
   <label for="disadvantages">Desavantages de l'engrenage</label>
   <textarea name="disadvantages" id="disadvantages">{{ request.form['disadvantages'] }}</textarea>
-  <h2>Select a file to upload</h2>
+  </p>
+  <h2 id="select">Sélectionner un fichier</h2>
   <p>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -34,6 +42,6 @@
       <input type="file" name="file" autocomplete="off">
     </p>
   </dl>
-  <input type="submit" value="Save">
+  <button type="submit">Créer</button>
 </form>
 {% endblock %}

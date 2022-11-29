@@ -1,27 +1,39 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='update.css') }}">
+
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Edition d'un engrenage "{{ post['title'] }}"{% endblock %}</h1>
+<h1 id="edit">{% block title %}Edition d'un engrenage{{ post['title'] }}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <!-- to do -->
 <form method="post">
+  <p>
     <label for="name">Nom</label>
     <input name="name" id="name" value="{{ request.form['name'] or post['name'] }}" required>
+    </p>
+    <p>
     <label for="description">Description </label>
     <textarea name="description" id="description">{{ request.form['description'] or post['description'] }}</textarea>
+    </p>
+    <p>
     <label for="Image">Image</label>
     <input name="image" id="Image" value="{{ request.form['Image'] }}">
+    </p>
+    <p>
     <label for="advantages">Advantages</label>
     <textarea name="advantages" id="advantages">{{ request.form['advantages'] or post['advantages'] }}</textarea>
+    </p>
+    <p>
     <label for="disadvantages">Disadvantages</label>
     <textarea name="disadvantages" id="disadvantages">{{ request.form['disadvantages'] }} or post['disadvantages']</textarea>
+    </p>
 
-    <input type="submit" value="Save">
+    <button type="submit">Valider</button>
   </form>
   <hr>
   <form action="{{ url_for('post.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+    <input class="danger" type="submit" value="Annuler" onclick="return confirm('Are you sure?');">
   </form>
   {% endblock %}
