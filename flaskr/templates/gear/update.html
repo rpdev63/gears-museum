@@ -19,8 +19,11 @@
     </p>
     <p>
     <label for="Image">Image</label>
-    <input name="image" id="Image" value="{{ request.form['Image'] }}">
-    </p>
+    <dl>
+      <p>
+        <input type="file" name="file" autocomplete="off">
+      </p>
+    </dl>    
     <p>
     <label for="advantages">Advantages</label>
     <textarea name="advantages" id="advantages">{{ request.form['advantages'] or post['advantages'] }}</textarea>
